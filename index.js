@@ -1,12 +1,14 @@
 var wpi = require("wiring-pi");
 
 var Service, Characteristic;
+
 module.exports = function(homebridge) {
   Service = homebridge.hap.Service;
   Characteristic = homebridge.hap.Characteristic;
-  homebridge.registerAccessory("homebridge-gpio-intercom", "Intercom", LockAccessory);
-}
-function IntercomAccessory(log, config) {
+  homebridge.registerAccessory("homebridge-gpio-intercom-door", "IntercomDoor", LockAccessory);
+};
+
+function IntercomDoorAccessory(log, config) {
   this.log = log;
   this.name = config["name"];
   this.pin = config['pin'];
@@ -24,7 +26,8 @@ function IntercomAccessory(log, config) {
     .getCharacteristic(Characteristic.LockTargetState)
     .on('set', this.setState.bind(this));
 }
-IntercomAccessory.prototype.setState = fusnction (state, callback) {
+
+IntercomDoorAccessory.prototype.setState = function (state, callback) {
     var self = this;
     callback = callback || function() {};
     if (this.lockTimer) {
@@ -58,20 +61,21 @@ IntercomAccessory.prototype.setState = fusnction (state, callback) {
         );
     }
     callback();
-}
-IntercomAccessory.prototype.getServices = function() {
-  return [this.service];
-}
+};
 
-IntercomAccessory.prototype.pinAction = function(action) {
+IntercomDoorAccessory.prototype.getServices = function() {
+  return [this.service];
+};
+
+IntercomDoorAccessory.prototype.pinAction = function(action) {
     this.log('Turning ' + (action == 1 ? 'on' : 'off') + ' pin #' + this.pin);
 
     var self = this;
     wpi.digitalWrite(self.pin, action);
     var success = (wpi.digitalRead(self.pin) == action);
     return success;
-}
+};
 
 var is_int = function(n) {
     return n % 1 === 0;
-}
+};

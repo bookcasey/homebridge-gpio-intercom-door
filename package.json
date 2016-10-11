@@ -1,14 +1,14 @@
 {
-  "name": "homebridge-gpio-intercom",
+  "name": "homebridge-gpio-intercom-door",
   "version": "0.0.1",
-  "description": "Control intercom door with Raspberry Pi GPIO and Homebridge: https://github.com/nfarina/homebridge",
+  "description": "Control building door through intercom with Raspberry Pi GPIO and Homebridge: https://github.com/nfarina/homebridge",
   "license": "MIT",
   "keywords": [
     "homebridge-plugin"
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/bookcasey/homebridge-gpio-intercom.git"
+    "url": "git://github.com/bookcasey/homebridge-gpio-intercom-door.git"
   },
   "engines": {
     "node": ">=0.12.0",
