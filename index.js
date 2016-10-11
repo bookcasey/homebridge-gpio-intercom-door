@@ -5,7 +5,7 @@ var Service, Characteristic;
 module.exports = function(homebridge) {
   Service = homebridge.hap.Service;
   Characteristic = homebridge.hap.Characteristic;
-  homebridge.registerAccessory("homebridge-gpio-intercom-door", "IntercomDoor", LockAccessory);
+  homebridge.registerAccessory("homebridge-gpio-intercom-door", "IntercomDoor", IntercomDoorAccessory);
 };
 
 function IntercomDoorAccessory(log, config) {
